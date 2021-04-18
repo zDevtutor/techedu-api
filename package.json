@@ -1,0 +1,19 @@
+{
+  "name": "techedu-api",
+  "version": "1.0.0",
+  "description": "Techedu backend API, Techedu is the gradution project for ITI track (Frontend & Cross Platform Mobile Development)",
+  "main": "server.js",
+  "scripts": {
+    "start": "set NODE_ENV=production&node server",
+    "dev": "nodemon server"
+  },
+  "author": "Mostafa Sayed",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
