@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const colors = require("colors");
 const morgan = require("morgan");
+const errorHandler = require("./middleware/error");
 const connectDB = require("./config/db");
 
 // Load env variables
@@ -26,6 +27,9 @@ if (process.env.NODE_ENV === "development") {
 
 // Mount Routers
 app.use("/api/v1/categories", categories);
+
+// Custom Error Handler Middleware
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
