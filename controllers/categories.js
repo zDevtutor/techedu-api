@@ -73,6 +73,8 @@ exports.deleteCategory = asyncHandler(async (req, res, next) => {
 // @desc    Delete All Categories
 // @route   DELETE /api/v1/categories
 // @access  Private
-exports.deleteCategories = (req, res, next) => {
-  res.status(200).json({ success: true, msg: "Delete All Categories" });
-};
+exports.deleteCategories = asyncHandler(async (req, res, next) => {
+  const categories = await Category.deleteMany();
+
+  res.status(200).json({ success: true, data: {} });
+});
