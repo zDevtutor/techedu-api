@@ -1,3 +1,4 @@
+const path = require("path");
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
 const Category = require("../models/Category");
@@ -21,7 +22,7 @@ exports.getCategory = asyncHandler(async (req, res, next) => {
 
   if (!category) {
     return next(
-      new ErrorResponse(`Resource not found with ID of ${req.params.id}`, 404)
+      new ErrorResponse(`Category not found with ID of ${req.params.id}`, 404)
     );
   }
 
@@ -48,7 +49,7 @@ exports.updateCategory = asyncHandler(async (req, res, next) => {
 
   if (!category) {
     return next(
-      new ErrorResponse(`Resource not found with ID of ${req.params.id}`, 404)
+      new ErrorResponse(`Category not found with ID of ${req.params.id}`, 404)
     );
   }
 
@@ -63,7 +64,7 @@ exports.deleteCategory = asyncHandler(async (req, res, next) => {
 
   if (!category) {
     return next(
-      new ErrorResponse(`Resource not found with ID of ${req.params.id}`, 404)
+      new ErrorResponse(`Category not found with ID of ${req.params.id}`, 404)
     );
   }
 
@@ -77,4 +78,52 @@ exports.deleteCategories = asyncHandler(async (req, res, next) => {
   const categories = await Category.deleteMany();
 
   res.status(200).json({ success: true, data: {} });
+});
+
+// @desc    Upload photo for category
+// @route   PUT /api/v1/categories/:id/photo
+// @access  Private
+exports.categoryPhotoUpload = asyncHandler(async (req, res, next) => {
+  const category = await Category.findById(req.params.id);
+
+  if (!category) {
+    return next(
+      new ErrorResponse(`Category not found with ID of ${req.params.id}`, 404)
+    );
+  }
+
+  if (!req.files) {
+    return next(new ErrorResponse(`Please upload a file`, 400));
+  }
+
+  const file = req.files.file;
+
+  // Make sure the image is a photo
+  if (!file.mimetype.startsWith("image")) {
+    return next(new ErrorResponse(`Please upload an image file`, 400));
+  }
+
+  // Check image size
+  if (file.size > process.env.MAX_FILE_SIZE) {
+    return next(
+      new ErrorResponse(
+        `Please upload an image less than ${process.env.MAX_FILE_SIZE}`,
+        400
+      )
+    );
+  }
+
+  // Create custom filename
+  file.name = `photo_${category._id}${path.parse(file.name).ext}`;
+
+  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
+    if (err) {
+      console.log(err);
+      return next(new ErrorResponse("Problem with file upload", 500));
+    }
+
+    await Category.findByIdAndUpdate(req.params.id, { photo: file.name });
+
+    res.status(200).json({ success: true, data: file.name });
+  });
 });

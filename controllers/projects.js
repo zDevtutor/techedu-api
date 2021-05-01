@@ -1,3 +1,4 @@
+const path = require("path");
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
 const Project = require("../models/Project");
@@ -95,4 +96,52 @@ exports.deleteProject = asyncHandler(async (req, res, next) => {
   await project.remove();
 
   res.status(200).json({ success: true, data: {} });
+});
+
+// @desc    Upload Photo For Project
+// @route   DELETE /api/v1/projects/:id/photo
+// @access  Private
+exports.projectPhotoUpload = asyncHandler(async (req, res, next) => {
+  const project = await Project.findById(req.params.id);
+
+  if (!project) {
+    return next(
+      new ErrorResponse(`Project not found with id ${req.params.id}`, 404)
+    );
+  }
+
+  if (!req.files) {
+    return next(new ErrorResponse(`Please upload a file`, 400));
+  }
+
+  const file = req.files.file;
+
+  // Make sure image is a photo
+  if (!file.mimetype.startsWith("image")) {
+    return next(new ErrorResponse(`Please upload an image file`, 400));
+  }
+
+  // Check Image size
+  if (file.size > process.env.MAX_FILE_SIZE) {
+    return next(
+      new ErrorResponse(
+        `Please upload an image less than ${process.env.MAX_FILE_SIZE}`,
+        400
+      )
+    );
+  }
+
+  // Create custom filename
+  file.name = `photo_${project._id}${path.parse(file.name).ext}`;
+
+  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
+    if (err) {
+      console.log(err);
+      return next(new ErrorResponse(`Problem with file upload`, 500));
+    }
+
+    await Project.findByIdAndUpdate(req.params.id, { photo: file.name });
+
+    res.status(200).json({ success: true, data: file.name });
+  });
 });

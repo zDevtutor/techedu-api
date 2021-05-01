@@ -1,50 +1,39 @@
 [
   {
-    "name": "UI / UX",
-    "photo": "Ui_UX.jpg"
+    "name": "UI / UX"
   },
   {
-    "name": "HTML5 / CSS3",
-    "photo": "Html5_Projects.jpg"
+    "name": "HTML5 / CSS3"
   },
   {
-    "name": "Bootstrap",
-    "photo": "Bootstrap_Projects.jpg"
+    "name": "Bootstrap"
   },
   {
-    "name": "SASS",
-    "photo": "SASS_Projects.jpg"
+    "name": "SASS"
   },
   {
-    "name": "Vanilla Javascript",
-    "photo": "Javascript_Projects.jpg"
+    "name": "Vanilla Javascript"
   },
   {
-    "name": "React / React Native",
-    "photo": "React_Projects.jpg"
+    "name": "React / React Native"
   },
   {
     "name": "Angular",
     "photo": "Angular_Projects.jpg"
   },
   {
-    "name": ".NET",
-    "photo": ".Net_Projects.jpg"
+    "name": ".NET"
   },
   {
-    "name": "PHP Scripts",
-    "photo": "PHP_Projects.jpg"
+    "name": "PHP Scripts"
   },
   {
-    "name": "Wordpress",
-    "photo": "Wordpress_Projects.jpg"
+    "name": "Wordpress"
   },
   {
-    "name": "Ecommerce",
-    "photo": "Ecommerce_Projects.jpg"
+    "name": "Ecommerce"
   },
   {
-    "name": "Mobile",
-    "photo": "Mobile_Projects.jpg"
+    "name": "Mobile"
   }
 ]

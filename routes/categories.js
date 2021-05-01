@@ -6,6 +6,7 @@ const {
   updateCategory,
   deleteCategory,
   deleteCategories,
+  categoryPhotoUpload,
 } = require("../controllers/categories");
 
 // Include other resource routers
@@ -15,6 +16,8 @@ const router = express.Router();
 
 // Re-route into other resource router
 router.use("/:categoryId/projects", projectRouter);
+
+router.route("/:id/photo").put(categoryPhotoUpload);
 
 router
   .route("/")
