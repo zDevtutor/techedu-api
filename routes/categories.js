@@ -7,7 +7,14 @@ const {
   deleteCategory,
   deleteCategories,
 } = require("../controllers/categories");
+
+// Include other resource routers
+const projectRouter = require("./projects");
+
 const router = express.Router();
+
+// Re-route into other resource router
+router.use("/:categoryId/projects", projectRouter);
 
 router
   .route("/")
