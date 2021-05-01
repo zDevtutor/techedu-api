@@ -16,6 +16,7 @@ connectDB();
 // Router files
 const categories = require("./routes/categories");
 const projects = require("./routes/projects");
+const auth = require("./routes/auth");
 
 const app = express();
 
@@ -36,6 +37,7 @@ if (process.env.NODE_ENV === "development") {
 // Mount Routers
 app.use("/api/v1/categories", categories);
 app.use("/api/v1/projects", projects);
+app.use("/api/v1/auth", auth);
 
 // Custom Error Handler Middleware
 app.use(errorHandler);
