@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const fileupload = require("express-fileupload");
+const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const colors = require("colors");
 const morgan = require("morgan");
@@ -22,6 +23,9 @@ const app = express();
 
 // Body parser
 app.use(express.json());
+
+// Cookie parser
+app.use(cookieParser());
 
 // File upload
 app.use(fileupload());

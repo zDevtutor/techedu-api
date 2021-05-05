@@ -7,12 +7,22 @@ const {
   deleteProject,
   projectPhotoUpload,
 } = require("../controllers/projects");
+
 const router = express.Router({ mergeParams: true });
 
-// Photo Upload
-router.route("/:id/photo").put(projectPhotoUpload);
+const { protect, authorize } = require("../middleware/auth");
 
-router.route("/").get(getProjects).post(createProject);
-router.route("/:id").get(getProject).put(updateProject).delete(deleteProject);
+// Photo Upload
+router
+  .route("/:id/photo")
+  .put(protect, authorize("student"), projectPhotoUpload);
+
+router.route("/").get(getProjects).post(protect, createProject);
+
+router
+  .route("/:id")
+  .get(getProject)
+  .put(protect, authorize("student"), updateProject)
+  .delete(protect, authorize("student"), deleteProject);
 
 module.exports = router;
