@@ -9,6 +9,7 @@ dotenv.config({ path: "./config/config.env" });
 // Load models
 const Category = require("./models/Category");
 const Project = require("./models/Project");
+const User = require("./models/User");
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI, {
@@ -23,12 +24,16 @@ const categories = JSON.parse(
 const projects = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/projects.json`, "utf-8")
 );
+const users = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/users.json`, "utf-8")
+);
 
 // Import data to DB
 const importData = async () => {
   try {
     await Category.create(categories);
     await Project.create(projects);
+    await User.create(users);
     console.log("Data Imported...".green.inverse);
     process.exit();
   } catch (err) {
@@ -41,6 +46,7 @@ const deleteData = async () => {
   try {
     await Category.deleteMany();
     await Project.deleteMany();
+    await User.deleteMany();
     console.log("Data Destroyed...".red.inverse);
     process.exit();
   } catch (err) {

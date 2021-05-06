@@ -12,9 +12,11 @@ exports.getProjects = asyncHandler(async (req, res, next) => {
   let query;
 
   if (req.params.categoryId) {
-    query = Project.find({ category: req.params.categoryId });
+    query = Project.find({ category: req.params.categoryId })
+      .populate("user")
+      .populate("category");
   } else {
-    query = Project.find();
+    query = Project.find().populate("user").populate("category");
   }
 
   const projects = await query;
@@ -43,8 +45,12 @@ exports.getProject = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/categories/:categoryId/projects
 // @access  Private
 exports.createProject = asyncHandler(async (req, res, next) => {
+  // Add category to project
   req.body.category = req.params.categoryId;
+  // Add user to project
+  req.body.user = req.user.id;
 
+  // Check for category exist
   const category = await Category.findById(req.params.categoryId);
 
   if (!category) {
@@ -52,6 +58,16 @@ exports.createProject = asyncHandler(async (req, res, next) => {
       new ErrorResponse(
         `Category not found with id ${req.params.categoryId}`,
         404
+      )
+    );
+  }
+
+  // Check for user role if it's student
+  if (req.user.role !== "student") {
+    return next(
+      new ErrorResponse(
+        `User role ${req.user.role} is not authorized to create a project`,
+        401
       )
     );
   }
@@ -73,6 +89,16 @@ exports.updateProject = asyncHandler(async (req, res, next) => {
     );
   }
 
+  // Makesure user is project owner
+  if (project.user.toString() !== req.user.id) {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to update this project`,
+        401
+      )
+    );
+  }
+
   project = await Project.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
@@ -90,6 +116,16 @@ exports.deleteProject = asyncHandler(async (req, res, next) => {
   if (!project) {
     return next(
       new ErrorResponse(`Project not found with id ${req.params.id}`, 404)
+    );
+  }
+
+  // Makesure user is project owner
+  if (project.user.toString() !== req.user.id) {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to delete this project`,
+        401
+      )
     );
   }
 
