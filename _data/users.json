@@ -1,20 +1,25 @@
-[
-	{
-		"name": "Admin Account",
-		"email": "admin@gmail.com",
-		"password": "123456",
-		"role": "admin"
-	},
-	{
-		"name": "Instructor Account",
-		"email": "instructor@gmail.com",
-		"password": "123456",
-		"role": "instructor"
-	},
-	{
-		"name": "Student Account",
-		"email": "student@gmail.com",
-		"password": "123456",
-		"role": "student"
-	}
-]
+[{
+  "_id": {
+    "$oid": "6096b67a6d7b4d0d1c020ba8"
+  },
+  "role": "admin",
+  "name": "Admin Account",
+  "email": "admin@gmail.com",
+  "password": "$2a$10$HTcMlHILjDSYGyulpuB8luRmKiIDwFaTexIlsdKrFthU5BND8jIG2"
+},{
+  "_id": {
+    "$oid": "6096b6dc6d7b4d0d1c020ba9"
+  },
+  "role": "instructor",
+  "name": "Instructor Account",
+  "email": "instructor@gmail.com",
+  "password": "$2a$10$7nMUN89zT0NnCfWKRmW6m.e8TvQqTBP8SJRNuQiSjUj4G0t4yPPLe"
+},{
+  "_id": {
+    "$oid": "6096b6eb6d7b4d0d1c020baa"
+  },
+  "role": "student",
+  "name": "Student Account",
+  "email": "student@gmail.com",
+  "password": "$2a$10$Hoiemp2mTDkQsMRnvNkxS.qsQRlnj0HGg1peKKLm46nkq5Hk9wqsW"
+}]
