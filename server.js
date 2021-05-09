@@ -17,6 +17,7 @@ connectDB();
 // Router files
 const categories = require("./routes/categories");
 const projects = require("./routes/projects");
+const reviews = require("./routes/reviews");
 const auth = require("./routes/auth");
 const users = require("./routes/users");
 
@@ -42,6 +43,7 @@ if (process.env.NODE_ENV === "development") {
 // Mount Routers
 app.use("/api/v1/categories", categories);
 app.use("/api/v1/projects", projects);
+app.use("/api/v1/reviews", reviews);
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/auth/users", users);
 

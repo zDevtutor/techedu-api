@@ -30,8 +30,7 @@ router
 router
   .route("/")
   .get(advancedResults(Category, "projects"), getCategories)
-  .post(protect, authorize("admin"), createCategory)
-  .delete(protect, authorize("admin"), deleteCategories);
+  .post(protect, authorize("admin"), createCategory);
 router
   .route("/:id")
   .get(getCategory)

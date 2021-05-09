@@ -21,7 +21,7 @@ exports.getProjects = asyncHandler(async (req, res, next) => {
       .status(200)
       .json({ success: true, count: projects.length, data: projects });
   } else {
-    res.status(200).json(res.advancedResutls);
+    res.status(200).json(res.advancedResults);
   }
 });
 
@@ -73,7 +73,7 @@ exports.createProject = asyncHandler(async (req, res, next) => {
 
   const project = await Project.create(req.body);
 
-  res.status(200).json({ success: true, data: project });
+  res.status(201).json({ success: true, data: project });
 });
 
 // @desc    Update Project
