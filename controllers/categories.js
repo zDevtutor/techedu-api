@@ -7,7 +7,7 @@ const Category = require("../models/Category");
 // @route   GET /api/v1/categories
 // @access  Public
 exports.getCategories = asyncHandler(async (req, res, next) => {
-  const categories = await Category.find();
+  const categories = await Category.find().populate("projects");
 
   res
     .status(200)

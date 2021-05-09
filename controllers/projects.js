@@ -29,15 +29,16 @@ exports.getProjects = asyncHandler(async (req, res, next) => {
   );
 
   if (req.params.categoryId) {
-    query = Project.find({ category: req.params.categoryId })
-      .populate({
+    query = Project.find({ category: req.params.categoryId }).populate(
+      {
         path: "user",
         select: "name",
-      })
-      .populate({
+      },
+      {
         path: "category",
         select: "name",
-      });
+      }
+    );
   } else {
     query = Project.find(JSON.parse(queryStr))
       .populate({
@@ -73,6 +74,10 @@ exports.getProjects = asyncHandler(async (req, res, next) => {
 
   query = query.skip(startIndex).limit(limit);
 
+  // Excuting query
+  const projects = await query;
+
+  // Pagination result
   const pagination = {};
 
   if (endIndex < total) {
@@ -88,9 +93,6 @@ exports.getProjects = asyncHandler(async (req, res, next) => {
       limit,
     };
   }
-
-  // Excuting query
-  const projects = await query;
 
   res.status(200).json({
     success: true,
