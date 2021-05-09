@@ -10,13 +10,14 @@ const {
 } = require("../controllers/categories");
 
 const Category = require("../models/Category");
-const advancedResults = require("../middleware/advancedResults");
 
 // Include other resource routers
 const projectRouter = require("./projects");
 
 const router = express.Router();
 
+// Middlewares
+const advancedResults = require("../middleware/advancedResults");
 const { protect, authorize } = require("../middleware/auth");
 
 // Re-route into other resource router

@@ -9,10 +9,11 @@ const {
 } = require("../controllers/projects");
 
 const Project = require("../models/Project");
-const advancedResults = require("../middleware/advancedResults");
 
 const router = express.Router({ mergeParams: true });
 
+// Middlewares
+const advancedResults = require("../middleware/advancedResults");
 const { protect, authorize } = require("../middleware/auth");
 
 // Photo Upload
