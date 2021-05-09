@@ -9,6 +9,9 @@ const {
   categoryPhotoUpload,
 } = require("../controllers/categories");
 
+const Category = require("../models/Category");
+const advancedResults = require("../middleware/advancedResults");
+
 // Include other resource routers
 const projectRouter = require("./projects");
 
@@ -25,7 +28,7 @@ router
 
 router
   .route("/")
-  .get(getCategories)
+  .get(advancedResults(Category, "projects"), getCategories)
   .post(protect, authorize("admin"), createCategory)
   .delete(protect, authorize("admin"), deleteCategories);
 router

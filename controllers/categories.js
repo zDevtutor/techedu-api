@@ -7,11 +7,7 @@ const Category = require("../models/Category");
 // @route   GET /api/v1/categories
 // @access  Public
 exports.getCategories = asyncHandler(async (req, res, next) => {
-  const categories = await Category.find().populate("projects");
-
-  res
-    .status(200)
-    .json({ success: true, count: categories.length, data: categories });
+  res.status(200).json(res.advancedResults);
 });
 
 // @desc    Get Single Category
