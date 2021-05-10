@@ -27,7 +27,7 @@ exports.getCategory = asyncHandler(async (req, res, next) => {
 
 // @desc    Create New Category
 // @route   POST /api/v1/categories
-// @access  Private
+// @access  Private/Admin
 exports.createCategory = asyncHandler(async (req, res, next) => {
   const category = await Category.create(req.body);
 
@@ -36,7 +36,7 @@ exports.createCategory = asyncHandler(async (req, res, next) => {
 
 // @desc    Update Category
 // @route   PUT /api/v1/categories/:id
-// @access  Private
+// @access  Private/Admin
 exports.updateCategory = asyncHandler(async (req, res, next) => {
   const category = await Category.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -54,7 +54,7 @@ exports.updateCategory = asyncHandler(async (req, res, next) => {
 
 // @desc    Delete Single Category
 // @route   DELETE /api/v1/categories/:id
-// @access  Private
+// @access  Private/Admin
 exports.deleteCategory = asyncHandler(async (req, res, next) => {
   const category = await Category.findByIdAndDelete(req.params.id);
 
@@ -69,7 +69,7 @@ exports.deleteCategory = asyncHandler(async (req, res, next) => {
 
 // @desc    Upload photo for category
 // @route   PUT /api/v1/categories/:id/photo
-// @access  Private
+// @access  Private/Admin
 exports.categoryPhotoUpload = asyncHandler(async (req, res, next) => {
   const category = await Category.findById(req.params.id);
 
