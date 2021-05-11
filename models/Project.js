@@ -27,7 +27,7 @@ const ProjectSchema = mongoose.Schema(
       min: [1, "Rating must be at least 1"],
       max: [10, "Rating must can not be more than 10"],
     },
-    favourite: {
+    favorite: {
       type: Boolean,
       default: false,
     },
