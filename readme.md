@@ -1,6 +1,6 @@
 # Techedu API
 
-> Backend API for Techedu application, which is an educational managment system for students to publish their projects, Build their profiles with github repos integrated and to get reviewed by instructors and companies.
+> Backend API for Techedu application, which is an educational managment system for students to publish their projects, Build their profiles to get reviewed by instructors and companies.
 
 ## Usage
 
