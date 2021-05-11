@@ -42,7 +42,7 @@ exports.getProject = asyncHandler(async (req, res, next) => {
 
 // @desc    Create New Project
 // @route   POST /api/v1/categories/:categoryId/projects
-// @access  Private
+// @access  Private/Student
 exports.createProject = asyncHandler(async (req, res, next) => {
   // Add category to project
   req.body.category = req.params.categoryId;
@@ -78,7 +78,7 @@ exports.createProject = asyncHandler(async (req, res, next) => {
 
 // @desc    Update Project
 // @route   PUT /api/v1/projects/:id
-// @access  Private
+// @access  Private/Student
 exports.updateProject = asyncHandler(async (req, res, next) => {
   let project = await Project.findById(req.params.id);
 
@@ -108,7 +108,7 @@ exports.updateProject = asyncHandler(async (req, res, next) => {
 
 // @desc    Delete Project
 // @route   DELETE /api/v1/projects/:id
-// @access  Private
+// @access  Private/Student
 exports.deleteProject = asyncHandler(async (req, res, next) => {
   const project = await Project.findById(req.params.id);
 
@@ -134,8 +134,8 @@ exports.deleteProject = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Upload Photo For Project
-// @route   DELETE /api/v1/projects/:id/photo
-// @access  Private
+// @route   PUT /api/v1/projects/:id/photo
+// @access  Private/Student
 exports.projectPhotoUpload = asyncHandler(async (req, res, next) => {
   const project = await Project.findById(req.params.id);
 

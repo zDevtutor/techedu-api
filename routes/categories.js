@@ -5,7 +5,6 @@ const {
   createCategory,
   updateCategory,
   deleteCategory,
-  deleteCategories,
   categoryPhotoUpload,
 } = require("../controllers/categories");
 
