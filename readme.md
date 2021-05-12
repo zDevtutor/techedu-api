@@ -30,7 +30,7 @@ npm start
 # Destroy all data
 node seeder -d
 
-#Import all data
+# Import all data
 node seeder -i
 ```
 
