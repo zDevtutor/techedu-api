@@ -36,7 +36,7 @@ node seeder -i
 
 ## Demo
 
-> The API is live at https://techedu-api.herokuapp.com/
+> The API is live at https://techeduapi.cyclic.app/
 
 - Version: 1.0.0
 - License: MIT
